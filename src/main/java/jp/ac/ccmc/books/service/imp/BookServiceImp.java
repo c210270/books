@@ -50,7 +50,7 @@ public class BookServiceImp implements BookService {
 
     @Override
     public Page<Book> getPageCustom(Integer i,Pageable pageable) {
-         Page<Book> page =  bookRepository.findAll(PageRequest.of(i,5));
+         Page<Book> page =  bookRepository.findAll(PageRequest.of(0+i,5));
          return page;
     }
 
