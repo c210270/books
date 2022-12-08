@@ -5,6 +5,7 @@ import jp.ac.ccmc.books.entity.Book;
 import jp.ac.ccmc.books.repository.BookRepository;
 import jp.ac.ccmc.books.service.BookService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Required;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
@@ -17,11 +18,9 @@ import java.util.List;
 public class BookController {
     @Autowired
     private BookService bookService;
-    @Autowired
-    private BookRepository bookRepository;
-
 
     //api get all book
+    @GetMapping("/book")
     public ResponseEntity<List<Book>> getAllBooks(){
         return ResponseEntity.ok(bookService.getAllBook());
     }
@@ -57,7 +56,7 @@ public class BookController {
     }
 
     @GetMapping("/book/find")
-    public ResponseEntity<List<Book>> findByIdPriceAuthor(@RequestParam Long bookId,@RequestParam String bookName,@RequestParam Integer price,@RequestParam String author){
+    public ResponseEntity<List<Book>> findByIdPriceAuthor(@RequestParam (required = false)Long bookId, @RequestParam (required = false) String bookName, @RequestParam(required = false)Integer price, @RequestParam(required = false) String author){
         List<Book> findBook= bookService.getByIdPriceAuthor(bookId,bookName,price,author);
          return ResponseEntity.ok(findBook);
     }
